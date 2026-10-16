@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NATIVOS — Más que una bebida, una historia que vive</title>
+<meta name="description" content="Bebidas elaboradas con frutas exóticas de la Amazonía. Conoce la historia de Nativos y aprovecha el 2x1 en una bebida.">
+<meta property="og:title" content="NATIVOS — Más que una bebida, una historia que vive">
+<meta property="og:description" content="Sabores extraordinarios de la Amazonía, historias que los acompañan.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="fotos/hero-amazonia.jpg">
+<meta name="theme-color" content="#0f2a1f">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --selva:#0f2a1f;
+    --selva-2:#173a2b;
+    --oliva:#6b7247;
+    --crema:#f4ecdc;
+    --marfil:#fbf7ee;
+    --dorado:#c9a24a;
+    --texto:#1d2a22;
+    --texto-suave:#55604f;
+    --serif:"Cormorant Garamond", "Georgia", serif;
+    --sans:"Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --ease:cubic-bezier(.2,.7,.2,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--texto);background:var(--marfil);line-height:1.65;-webkit-font-smoothing:antialiased}
+  img{display:block;max-width:100%}
+  a{color:inherit}
+  :focus-visible{outline:2px solid var(--dorado);outline-offset:4px}
+
+  /* ---------- Fotografía (slots reemplazables) ---------- */
+  .foto{
+    position:relative;overflow:hidden;background-color:var(--selva-2);
+    background-size:cover;background-position:center;
+  }
+  .foto:not([class*="foto--"]){background-image:var(--fallback, linear-gradient(160deg,#1c4a36,#07150f))}
+  .foto::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 30% 20%,transparent 40%,rgba(8,20,14,.45) 100%);pointer-events:none}
+  .foto--hero{background-image:linear-gradient(160deg,#1c4a36 0%,#0f2a1f 55%,#07150f 100%)}
+  .foto--raices{background-image:linear-gradient(200deg,#8a7a4c 0%,#3d4a2c 60%,#1d2a22 100%)}
+  .foto--selva{background-image:linear-gradient(180deg,#24553d 0%,#10301f 70%,#0a1d14 100%)}
+  .foto--impacto{background-image:linear-gradient(120deg,#5b6a3a 0%,#25402e 60%,#12261b 100%)}
+  .foto--promo{background-image:linear-gradient(180deg,#0c2118 0%,#143626 100%)}
+
+  /* ---------- Tipografía ---------- */
+  .eyebrow{font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--dorado);font-weight:500}
+  h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.05;letter-spacing:-.01em}
+  h2{font-size:clamp(2.2rem,4.6vw,3.8rem)}
+  h3{font-size:1.6rem}
+  .lead{font-size:clamp(1.05rem,1.4vw,1.2rem);color:var(--texto-suave);max-width:36rem}
+
+  /* ---------- Navegación ---------- */
+  header.nav{
+    position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+    padding:1.1rem clamp(1.25rem,4vw,3rem);transition:background .4s var(--ease),padding .4s var(--ease),box-shadow .4s;
+    color:var(--crema);
+  }
+  header.nav.scrolled{background:rgba(15,42,31,.92);backdrop-filter:blur(8px);padding:.75rem clamp(1.25rem,4vw,3rem);box-shadow:0 1px 0 rgba(201,162,74,.18)}
+  .wordmark{font-family:var(--serif);font-size:1.5rem;letter-spacing:.42em;font-weight:600;text-decoration:none;padding-left:.42em}
+  .nav ul{display:flex;gap:2rem;list-style:none;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase}
+  .nav ul a{text-decoration:none;opacity:.85;transition:opacity .3s,color .3s}
+  .nav ul a:hover{opacity:1;color:var(--dorado)}
+  .menu-btn{display:none;background:none;border:0;color:inherit;font:inherit;letter-spacing:.14em;text-transform:uppercase;font-size:.78rem;cursor:pointer}
+
+  /* ---------- Botones ---------- */
+  .btn{
+    display:inline-flex;align-items:center;gap:.7rem;padding:1rem 1.8rem;border:1px solid var(--dorado);
+    font:500 .8rem/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;text-decoration:none;cursor:pointer;
+    transition:background .35s var(--ease),color .35s var(--ease),transform .35s var(--ease);
+  }
+  .btn--oro{background:var(--dorado);color:var(--selva)}
+  .btn--oro:hover{background:transparent;color:var(--dorado)}
+  .btn--linea{color:var(--crema);background:transparent}
+  .btn--linea:hover{background:var(--crema);color:var(--selva)}
+  .btn--linea-oscuro{color:var(--selva);border-color:var(--selva)}
+  .btn--linea-oscuro:hover{background:var(--selva);color:var(--crema)}
+
+  /* ---------- 1. HERO ---------- */
+  .hero{position:relative;min-height:100svh;display:grid;align-items:end;color:var(--crema);overflow:hidden}
+  .hero .foto{position:absolute;inset:0;transform:scale(1.08);animation:lento 18s var(--ease) forwards}
+  @keyframes lento{to{transform:scale(1)}}
+  .hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(7,21,15,.55) 0%,rgba(7,21,15,.15) 35%,rgba(7,21,15,.78) 100%)}
+  .hero__inner{position:relative;z-index:2;padding:0 clamp(1.25rem,5vw,4.5rem) clamp(3.5rem,8vh,6rem);max-width:1400px}
+  .hero__titulo{font-size:clamp(3rem,8.5vw,7.4rem);font-weight:400;margin:1rem 0 1.4rem;max-width:12ch}
+  .hero__titulo em{font-style:italic;color:var(--dorado)}
+  .hero__texto{font-size:clamp(1rem,1.25vw,1.15rem);max-width:32rem;opacity:.9;margin-bottom:2.2rem}
+  .hero__bebidas{
+    position:absolute;z-index:2;right:clamp(1.25rem,6vw,6rem);bottom:clamp(3.5rem,8vh,6rem);display:flex;align-items:flex-end;gap:1.2rem;
+  }
+  .hero__bebidas svg{height:clamp(170px,30vh,300px);width:auto;filter:drop-shadow(0 22px 30px rgba(0,0,0,.35))}
+  .hero__bebidas svg:nth-child(2){height:clamp(200px,36vh,360px)}
+  .hero__scroll{position:absolute;z-index:2;left:50%;bottom:1.2rem;transform:translateX(-50%);font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;opacity:.7}
+
+  /* ---------- Secciones comunes ---------- */
+  section{position:relative}
+  .wrap{max-width:1280px;margin:0 auto;padding:clamp(5rem,11vw,9rem) clamp(1.25rem,5vw,4rem)}
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity 1.1s var(--ease),transform 1.1s var(--ease)}
+  .reveal.visible{opacity:1;transform:none}
+
+  /* ---------- 2. HISTORIA ---------- */
+  .historia{background:var(--crema)}
+  .historia__grid{display:grid;grid-template-columns:1.25fr 1fr;gap:clamp(2.5rem,6vw,6rem);align-items:center}
+  .historia .foto{aspect-ratio:4/5}
+  .historia__texto p{margin-top:1.4rem;color:var(--texto-suave);font-size:1.02rem}
+  .historia__texto p:first-of-type{font-family:var(--serif);font-size:1.5rem;line-height:1.5;color:var(--texto);font-style:italic}
+  .nota-validacion{display:inline-block;margin-top:1.8rem;font-size:.78rem;color:var(--oliva);border-left:2px solid var(--dorado);padding:.2rem 0 .2rem .9rem}
+
+  /* ---------- 3. FRUTAS ---------- */
+  .frutas{background:var(--marfil)}
+  .frutas__cab{display:flex;justify-content:space-between;align-items:end;gap:2rem;flex-wrap:wrap;margin-bottom:clamp(3rem,6vw,5rem)}
+  .frutas__lista{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(2rem,4vw,3.5rem) clamp(1.25rem,2.5vw,2.5rem)}
+  .fruta{display:flex;flex-direction:column;gap:1rem}
+  .fruta .foto{aspect-ratio:3/4}
+  .fruta:nth-child(1){grid-column:span 7}
+  .fruta:nth-child(2){grid-column:span 5;margin-top:4rem}
+  .fruta:nth-child(3){grid-column:span 4}
+  .fruta:nth-child(4){grid-column:span 4;margin-top:3rem}
+  .fruta:nth-child(5){grid-column:span 4}
+  .fruta:nth-child(6){grid-column:span 12;display:grid;grid-template-columns:1.4fr 1fr;align-items:end;gap:2rem}
+  .fruta:nth-child(6) .foto{aspect-ratio:16/9}
+  .fruta__nombre{font-family:var(--serif);font-size:1.9rem;line-height:1.1}
+  .fruta__cientifico{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--oliva)}
+  .fruta p{font-size:.95rem;color:var(--texto-suave);max-width:28rem}
+
+  /* ---------- 4. PRODUCTOS ---------- */
+  .productos{background:var(--selva);color:var(--crema)}
+  .productos .lead{color:rgba(244,236,220,.72)}
+  .productos h2 em{color:var(--dorado)}
+  .bebidas{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.5rem,3vw,3rem);margin-top:clamp(3rem,6vw,5rem)}
+  .bebida{text-align:center;display:flex;flex-direction:column;align-items:center}
+  .bebida svg{height:clamp(300px,42vh,420px);width:auto;transition:transform .8s var(--ease)}
+  .bebida:hover svg{transform:translateY(-10px)}
+  .bebida h3{margin-top:1.4rem;font-size:1.75rem}
+  .bebida .tag{font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--dorado);margin-top:.5rem}
+  .bebida p{font-size:.95rem;color:rgba(244,236,220,.72);margin-top:.9rem;max-width:22rem}
+  .concepto{display:inline-block;margin-top:1.2rem;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(244,236,220,.5);border:1px dashed rgba(244,236,220,.3);padding:.3rem .7rem}
+
+  /* ---------- 5. IMPACTO ---------- */
+  .impacto{background:var(--crema)}
+  .impacto__top{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2.5rem,6vw,6rem);align-items:end;margin-bottom:clamp(3rem,6vw,5rem)}
+  .impacto__mosaico{display:grid;grid-template-columns:1.4fr 1fr;grid-template-rows:auto auto;gap:clamp(1rem,2vw,1.6rem)}
+  .impacto__mosaico .foto:nth-child(1){grid-row:span 2;aspect-ratio:3/4}
+  .impacto__mosaico .foto:nth-child(2){aspect-ratio:4/3}
+  .impacto__mosaico .foto:nth-child(3){aspect-ratio:4/3}
+  .impacto__declaracion{font-family:var(--serif);font-size:clamp(1.5rem,2.4vw,2.1rem);line-height:1.35;color:var(--selva);margin-top:2.5rem;max-width:34rem}
+  .impacto__compromisos{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3.5rem;border-top:1px solid rgba(29,42,34,.15);padding-top:2.5rem}
+  .impacto__compromisos h3{font-size:1.35rem;margin-bottom:.6rem}
+  .impacto__compromisos p{font-size:.95rem;color:var(--texto-suave)}
+  .validar{color:var(--oliva);font-size:.78rem;font-style:italic;display:block;margin-top:.6rem}
+
+  /* ---------- 6. PROMOCIÓN ---------- */
+  .promo{color:var(--crema);overflow:hidden}
+  .promo .foto{position:absolute;inset:0}
+  .promo::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(100deg,rgba(7,21,15,.94) 0%,rgba(7,21,15,.78) 55%,rgba(7,21,15,.55) 100%)}
+  .promo__inner{position:relative;z-index:2;display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(2.5rem,6vw,6rem);align-items:center}
+  .promo__titulo{font-size:clamp(2.4rem,5.4vw,4.8rem);font-weight:400;line-height:1;margin:1rem 0 1.5rem}
+  .promo__oferta{font-family:var(--serif);font-size:clamp(3.2rem,8vw,6.8rem);line-height:.9;color:var(--dorado);font-weight:500;margin:.6rem 0 1.2rem}
+  .promo__texto{opacity:.85;max-width:28rem;margin-bottom:2.2rem}
+  .promo__acciones{display:flex;flex-wrap:wrap;gap:1rem;align-items:center}
+  .promo__nota{font-size:.78rem;opacity:.6;margin-top:1.8rem;max-width:30rem}
+  .qr-bloque{background:var(--marfil);color:var(--selva);padding:2rem;justify-self:center;width:min(320px,100%);text-align:center}
+  .qr-bloque .qr-caja{aspect-ratio:1/1;border:1px dashed rgba(15,42,31,.35);display:grid;place-items:center;margin:0 auto 1.2rem;background:#fff;color:rgba(15,42,31,.5);font-size:.8rem;padding:1.5rem}
+  .qr-bloque p{font-size:.8rem;color:var(--texto-suave)}
+  .qr-bloque code{font-size:.72rem;word-break:break-all;display:block;margin-top:.6rem;color:var(--oliva)}
+
+
+  .bebida__foto{width:100%;max-width:340px;aspect-ratio:4/5;object-fit:cover;background:#fff;filter:saturate(1.02)}
+  .bebida__pendiente{width:100%;max-width:340px;aspect-ratio:4/5;display:grid;place-items:center;border:1px dashed rgba(244,236,220,.3);color:rgba(244,236,220,.5);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase}
+
+  /* ---------- Pie ---------- */
+  footer{background:var(--selva);color:rgba(244,236,220,.6);padding:3rem clamp(1.25rem,5vw,4rem);font-size:.82rem;display:flex;justify-content:space-between;gap:1.5rem;flex-wrap:wrap}
+  footer .wordmark{color:var(--crema);font-size:1.1rem}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:980px){
+    .historia__grid,.impacto__top,.promo__inner{grid-template-columns:1fr}
+    .historia .foto{aspect-ratio:4/3}
+    .frutas__lista .fruta{grid-column:span 12 !important;margin-top:0 !important}
+    .fruta:nth-child(6){grid-template-columns:1fr}
+    .bebidas{grid-template-columns:1fr;gap:4rem}
+    .impacto__compromisos{grid-template-columns:1fr}
+    .hero__bebidas{position:relative;right:auto;bottom:auto;justify-content:center;margin-top:2rem;opacity:.95}
+    .hero{align-items:end}
+    .nav ul{display:none}
+    .menu-btn{display:block}
+    .nav.abierto ul{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--selva);padding:1.5rem;gap:1.2rem}
+    .qr-bloque{justify-self:start}
+  }
+  @media (max-width:560px){
+    .hero__bebidas svg{height:150px}
+    .hero__bebidas svg:nth-child(2){height:180px}
+    .hero__scroll{display:none}
+    .impacto__mosaico{grid-template-columns:1fr}
+    .impacto__mosaico .foto:nth-child(1){grid-row:auto}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none !important;transition:none !important;scroll-behavior:auto !important}
+    .reveal{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- Símbolos de bebidas reutilizables (colores inspirados en la fruta; reemplazar por fotografía del producto real cuando exista) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="liquido-acai" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7a2b6e"/><stop offset="1" stop-color="#3b1236"/>
+    </linearGradient>
+    <linearGradient id="liquido-copoazu" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e6cf8a"/><stop offset="1" stop-color="#9a7b3a"/>
+    </linearGradient>
+    <linearGradient id="liquido-camu" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e8a04a"/><stop offset="1" stop-color="#a9582a"/>
+    </linearGradient>
+    <linearGradient id="vidrio" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".0"/>
+      <stop offset=".3" stop-color="#ffffff" stop-opacity=".35"/>
+      <stop offset=".5" stop-color="#ffffff" stop-opacity=".05"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<header class="nav" id="nav">
+  <a href="#inicio" class="wordmark" aria-label="NATIVOS, inicio">NATIVOS</a>
+  <button class="menu-btn" aria-expanded="false" aria-controls="menu">Menú</button>
+  <nav aria-label="Principal">
+    <ul id="menu">
+      <li><a href="#historia">Historia</a></li>
+      <li><a href="#frutas">Frutas</a></li>
+      <li><a href="#productos">Bebidas</a></li>
+      <li><a href="#impacto">Impacto</a></li>
+      <li><a href="#promocion">2x1</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- 1. HERO -->
+<section class="hero" id="inicio">
+  <div class="foto foto--hero" data-foto="fotos/hero-amazonia.jpg" role="img" aria-label="Paisaje cinematográfico de la selva amazónica al amanecer (reemplazar por fotografía licenciada)"></div>
+
+  <div class="hero__bebidas" aria-hidden="true">
+    <svg viewBox="0 0 120 300"><path d="M14 40 L106 40 L92 290 L28 290 Z" fill="url(#liquido-acai)" opacity=".95"/><path d="M14 40 L106 40 L104 60 L16 60 Z" fill="#f4ecdc" opacity=".18"/><path d="M14 40 L106 40 L92 290 L28 290 Z" fill="url(#vidrio)"/><rect x="14" y="36" width="92" height="6" fill="#fbf7ee" opacity=".6"/></svg>
+    <svg viewBox="0 0 120 300"><path d="M14 40 L106 40 L92 290 L28 290 Z" fill="url(#liquido-copoazu)" opacity=".95"/><path d="M14 40 L106 40 L92 290 L28 290 Z" fill="url(#vidrio)"/><rect x="14" y="36" width="92" height="6" fill="#fbf7ee" opacity=".6"/></svg>
+    <svg viewBox="0 0 120 300"><path d="M14 40 L106 40 L92 290 L28 290 Z" fill="url(#liquido-camu)" opacity=".95"/><path d="M14 40 L106 40 L92 290 L28 290 Z" fill="url(#vidrio)"/><rect x="14" y="36" width="92" height="6" fill="#fbf7ee" opacity=".6"/></svg>
+  </div>
+
+  <div class="hero__inner">
+    <p class="eyebrow">Bebidas de la Amazonía</p>
+    <h1 class="hero__titulo">Más que una bebida, <em>una historia que vive.</em></h1>
+    <p class="hero__texto">Descubre los sabores extraordinarios de la Amazonía, conoce las historias que los acompañan y conecta con la riqueza natural y cultural de nuestros territorios.</p>
+    <a class="btn btn--oro" href="#historia">Descubre nuestra historia <span aria-hidden="true">↓</span></a>
+  </div>
+  <span class="hero__scroll" aria-hidden="true">Desliza</span>
+</section>
+
+<!-- 2. HISTORIA -->
+<section class="historia" id="historia">
+  <div class="wrap">
+    <div class="historia__grid">
+      <div class="foto foto--raices reveal" data-foto="fotos/comunidad-amazonica.jpg" role="img" aria-label="Fotografía documental de una comunidad indígena amazónica (reemplazar por imagen con consentimiento y licencia)"></div>
+      <div class="historia__texto reveal">
+        <p class="eyebrow">Nuestra historia</p>
+        <h2 style="margin-top:1rem">Raíces que <em>conectan.</em></h2>
+        <p>Nativos nace de la fascinación por la riqueza de la Amazonía, sus sabores extraordinarios y los conocimientos que han acompañado a sus comunidades durante generaciones.</p>
+        <p>Creemos que detrás de cada ingrediente existe una historia que merece ser conocida. Queremos acercar a las personas a los sabores de nuestra tierra y promover una conexión más consciente con la naturaleza y las culturas que forman parte de ella.</p>
+        <span class="nota-validacion">[Validar con el equipo: esta narrativa debe ajustarse a la historia real de la marca, fundadores y origen de los ingredientes.]</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. FRUTAS -->
+<section class="frutas" id="frutas">
+  <div class="wrap">
+    <div class="frutas__cab reveal">
+      <div>
+        <p class="eyebrow">Ingredientes</p>
+        <h2 style="margin-top:1rem">El Amazonas <em>en cada sorbo.</em></h2>
+      </div>
+      <p class="lead">Frutas de la Amazonía y de regiones vecinas. Cada una aporta un carácter distinto: desde la profundidad del açaí hasta la acidez vibrante del camu camu.</p>
+    </div>
+
+    <div class="frutas__lista">
+      <article class="fruta reveal">
+        <div class="foto" data-foto="fotos/acai.jpg" role="img" aria-label="Açaí en primer plano (reemplazar por fotografía propia o licenciada)" style="--fallback:linear-gradient(160deg,#5b2250,#1f0a1c)"></div>
+        <h3 class="fruta__nombre">Açaí</h3>
+        <span class="fruta__cientifico">Euterpe oleracea · Amazonía</span>
+        <p>Baya morada de sabor terroso y ligeramente frutal, fruto de una palmera que crece en zonas inundables de la cuenca amazónica.</p>
+      </article>
+
+      <article class="fruta reveal">
+        <div class="foto" data-foto="fotos/copoazu.jpg" role="img" aria-label="Copoazú partido en dos (reemplazar por fotografía licenciada)" style="--fallback:linear-gradient(160deg,#c9a85a,#5b4422)"></div>
+        <h3 class="fruta__nombre">Copoazú</h3>
+        <span class="fruta__cientifico">Theobroma grandiflorum · Amazonía</span>
+        <p>Pulpa cremosa, ácida y aromática, emparentada con el cacao. Tiene notas tropicales que recuerdan al chocolate blanco.</p>
+      </article>
+
+      <article class="fruta reveal">
+        <div class="foto" data-foto="fotos/camu-camu.jpg" role="img" aria-label="Camu camu en primer plano (reemplazar por fotografía licenciada)" style="--fallback:linear-gradient(160deg,#d98a3a,#6b3316)"></div>
+        <h3 class="fruta__nombre">Camu camu</h3>
+        <span class="fruta__cientifico">Myrciaria dubia · Amazonía</span>
+        <p>Pequeña fruta muy ácida, conocida por su alto contenido de vitamina C.</p>
+      </article>
+
+      <article class="fruta reveal">
+        <div class="foto" data-foto="fotos/maracuya.jpg" role="img" aria-label="Maracuyá maduro partido (reemplazar por fotografía licenciada)" style="--fallback:linear-gradient(160deg,#c7a33d,#5a4415)"></div>
+        <h3 class="fruta__nombre">Maracuyá</h3>
+        <span class="fruta__cientifico">Passiflora edulis · Sudamérica</span>
+        <p>Aroma intenso y acidez equilibrada. [Validar: indicar si la variedad usada es amazónica o de otra región.]</p>
+      </article>
+
+      <article class="fruta reveal">
+        <div class="foto" data-foto="fotos/uchuva.jpg" role="img" aria-label="Uchuva en su cáliz (reemplazar por fotografía licenciada)" style="--fallback:linear-gradient(160deg,#e0a04a,#7a4418)"></div>
+        <h3 class="fruta__nombre">Uchuva</h3>
+        <span class="fruta__cientifico">Physalis peruviana · Región andina</span>
+        <p>Fruta dulce-ácida envuelta en un cáliz de papel. Se cultiva sobre todo en zonas andinas, no en la Amazonía; se incluye por su afinidad de sabor con la selección.</p>
+      </article>
+
+      <p class="reveal" style="grid-column:span 12;font-size:.85rem;color:var(--oliva);font-style:italic">[Validar antes de publicar: qué frutas se usan realmente en el menú actual. Esta sección no debe afirmar que todas forman parte de las bebidas sin confirmarlo.]</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4. PRODUCTOS -->
+<section class="productos" id="productos">
+  <div class="wrap">
+    <p class="eyebrow reveal">Nuestras bebidas</p>
+    <h2 class="reveal" style="margin-top:1rem">Sabores que <em>sorprenden.</em></h2>
+    <p class="lead reveal" style="margin-top:1.4rem">Bebidas frías, con colores naturales y la fruta a la vista.</p>
+
+    <div class="bebidas">
+      <article class="bebida reveal">
+        <img class="bebida__foto" src="fotos/refrescante-sandia.jpg" alt="Refresco Nukak de sandía, fresa y naranja en vaso transparente" loading="lazy">
+        <h3>Nukak</h3>
+        <span class="tag">Refrescantes · Sandía + fresa + naranja</span>
+        <p>Frío, rojo y refrescante. La sandía domina y la naranja le da el punto cítrico.</p>
+      </article>
+
+      <article class="bebida reveal">
+        <img class="bebida__foto" src="fotos/smoothie-frutos-rojos.jpg" alt="Smoothie de frutos rojos en vaso transparente con moras y arándanos" loading="lazy">
+        <h3>Smoothies de frutos rojos</h3>
+        <span class="tag">Mocagua · Kubeo · Kamsá · Frutos rojos</span>
+        <p>Batidos con yogur tradicional, yogur griego o helado. Frutos rojos y mezclas con melocotón, mango y maracuyá.</p>
+      </article>
+
+      <article class="bebida reveal">
+        <div class="bebida__pendiente">Foto pendiente</div>
+        <h3>Tribu</h3>
+        <span class="tag">Refrescantes · Piña + mango + naranja</span>
+        <p>Tropical y dorada. Fotografía de producto por tomar.</p>
+      </article>
+    </div>
+    <p class="reveal" style="margin-top:3.5rem;font-size:.82rem;color:rgba(244,236,220,.5);max-width:40rem">[Validar: precios, tamaños, ingredientes exactos y nombres oficiales. Hasta entonces, estas tarjetas son conceptos visuales editables.]</p>
+  </div>
+</section>
+
+<!-- 5. IMPACTO -->
+<section class="impacto" id="impacto">
+  <div class="wrap">
+    <div class="impacto__top">
+      <div class="reveal">
+        <p class="eyebrow">Impacto social</p>
+        <h2 style="margin-top:1rem">Una historia que va <em>más allá del sabor.</em></h2>
+        <p class="impacto__declaracion">Los sabores de la Amazonía están profundamente conectados con sus territorios y con las personas que han conservado sus conocimientos y tradiciones a lo largo del tiempo.</p>
+      </div>
+      <div class="impacto__mosaico reveal">
+        <div class="foto foto--impacto" data-foto="fotos/personas-territorio.jpg" role="img" aria-label="Persona de una comunidad amazónica en su territorio (documental, con consentimiento y licencia)"></div>
+        <div class="foto foto--selva" data-foto="fotos/actividad-comunitaria.jpg" role="img" aria-label="Actividad comunitaria en la selva (reemplazar por fotografía licenciada)"></div>
+        <div class="foto foto--raices" data-foto="fotos/paisaje-rio.jpg" role="img" aria-label="Paisaje de río amazónico (reemplazar por fotografía licenciada)"></div>
+      </div>
+    </div>
+
+    <div class="impacto__compromisos reveal">
+      <div>
+        <h3>Reconocer</h3>
+        <p>Queremos que descubrir estos ingredientes sea una oportunidad para reconocer el valor de las comunidades indígenas y la riqueza cultural de la región.</p>
+      </div>
+      <div>
+        <h3>Respetar</h3>
+        <p>Las comunidades no son elementos decorativos. Su presencia en esta marca debe basarse en consentimiento y en su propia voz.</p>
+      </div>
+      <div>
+        <h3>Documentar</h3>
+        <p>Cualquier iniciativa concreta, alianza o donación se publicará solo cuando esté confirmada.<span class="validar">[Validar: proyectos, alianzas o aportes reales antes de incluirlos.]</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. PROMOCIÓN -->
+<section class="promo" id="promocion">
+  <div class="foto foto--promo" data-foto="fotos/smoothie-frutos-rojos.jpg" role="img" aria-label="Bebidas y frutas en primer plano sobre vegetación amazónica oscura (reemplazar por fotografía licenciada)"></div>
+  <div class="wrap">
+    <div class="promo__inner">
+      <div class="reveal">
+        <p class="eyebrow">Promoción</p>
+        <h2 class="promo__titulo">Descubre los sabores de NATIVOS.</h2>
+        <p class="promo__oferta">2x1 en una bebida.</p>
+        <p class="promo__texto">Comparte una experiencia de sabores extraordinarios. Escanea, descubre y disfruta NATIVOS.</p>
+        <div class="promo__acciones">
+          <a class="btn btn--oro" href="#" id="cta-2x1" data-destino="">Quiero aprovechar el 2x1</a>
+        </div>
+        <p class="promo__nota" id="nota-promo">[Editable: condiciones, vigencia, bebidas participantes y forma de redención. Reemplazar este texto antes de publicar.]</p>
+      </div>
+
+      <div class="qr-bloque reveal" id="qr">
+        <div class="qr-caja" id="qr-caja">Código QR pendiente.<br>Se genera al tener la URL pública.</div>
+        <p>Escanea con la cámara del teléfono.</p>
+        <code id="qr-url">URL pública: por definir</code>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>
+    <span class="wordmark">NATIVOS</span>
+    <p style="margin-top:.8rem;max-width:28rem">Bebidas de frutas exóticas de la Amazonía. Más que una bebida, una historia que vive.</p>
+  </div>
+  <div>
+    <p>© <span id="anio"></span> NATIVOS</p>
+  </div>
+</footer>
+
+<script>
+  // Fotografías: cargar la imagen real si el archivo existe; si no, queda el gradiente de respaldo.
+  document.querySelectorAll('[data-foto]').forEach(function (el) {
+    var src = el.getAttribute('data-foto');
+    var img = new Image();
+    img.onload = function () {
+      el.style.backgroundImage = 'url("' + src + '")';
+    };
+    img.src = src;
+  });
+
+  // Navegación: sombra al hacer scroll
+  var nav = document.getElementById('nav');
+  var onScroll = function () { nav.classList.toggle('scrolled', window.scrollY > 40); };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Menú móvil
+  var menuBtn = document.querySelector('.menu-btn');
+  menuBtn.addEventListener('click', function () {
+    var abierto = nav.classList.toggle('abierto');
+    menuBtn.setAttribute('aria-expanded', String(abierto));
+  });
+  document.querySelectorAll('#menu a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      nav.classList.remove('abierto');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Revelado suave al entrar en pantalla
+  var revelar = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entradas) {
+      entradas.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    revelar.forEach(function (el) { io.observe(el); });
+  } else {
+    revelar.forEach(function (el) { el.classList.add('visible'); });
+  }
+
+  // Botón de la promoción: configurable (enlace, ubicación o instrucción de redención)
+  // Editar data-destino con la URL de redención o el texto de instrucciones.
+  var cta = document.getElementById('cta-2x1');
+  cta.addEventListener('click', function (e) {
+    var destino = cta.getAttribute('data-destino');
+    if (!destino) {
+      e.preventDefault();
+      document.getElementById('nota-promo').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    if (/^https?:\/\//.test(destino)) { cta.setAttribute('href', destino); }
+  });
+
+  document.getElementById('anio').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
